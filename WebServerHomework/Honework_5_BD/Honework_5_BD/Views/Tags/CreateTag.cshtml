@@ -1,0 +1,41 @@
+@model Honework_5_BD.Models.Tag.TagModel
+
+@{
+    ViewData["Title"] = "Create Tag";
+}
+
+<h1>Create Tag</h1>
+
+<h4>TagModel</h4>
+<hr />
+<br/>
+<br/>
+<div class="row">
+    <div class="col-md-4">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <form asp-action="CreateTag">
+            <!-- Display validation summary for model -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <!-- Input for Name -->
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            
+            <!-- Submit button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Link to go back to the list -->
+<div>
+    <a asp-action="IndexTag">Back to List</a>
+</div>

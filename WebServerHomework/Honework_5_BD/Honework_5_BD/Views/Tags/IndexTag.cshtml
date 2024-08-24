@@ -1,0 +1,47 @@
+@model IEnumerable<Honework_5_BD.Models.Tag.TagModel>
+
+@{
+    ViewData["Title"] = "Tags List";
+}
+
+<h1>Tags List</h1>
+
+<p>
+    <a asp-action="CreateTag" class="btn btn-primary">Create New Tag</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <!-- Table headers -->
+        <th>
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <!-- Display Tag ID -->
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <!-- Display Tag Name -->
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <!-- Links for Edit, Details, and Delete actions -->
+                <a asp-action="EditTag" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                <a asp-action="DetailsTag" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                <a asp-action="DeleteTag" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
