@@ -1,0 +1,93 @@
+@{
+ViewData["Title"] = "Get first page";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Data for build form</p>
+
+<div>
+    <select id="lstCountries"></select>
+</div>
+<div>
+    <select id="lstAreas"></select>
+</div>
+<div>
+    <select id="lstCity"></select>
+</div>
+
+<script>
+
+    const lstCountries = document.getElementById("lstCountries");
+    const lstAreas = document.getElementById("lstAreas");
+    const lstCity = document.getElementById("lstCity");
+
+    function loadCountries() {
+        fetch('/api/ApiCountries/')
+            .then(res => res.json())
+            .then(data => {
+                data.map( c => {
+                    console.log(c)
+                    let option = document.createElement('option')
+                    option.value = c.id
+                    option.innerHTML = c.name
+                    lstCountries.appendChild(option)
+                })
+            })
+            .catch(err => {
+                console.error(err)
+            } )
+    }
+
+    
+
+    lstCountries.onchange = (ev) => {
+        console.log(ev.clientX)
+        console.log(ev.clientY)
+        let countryId = ev.target.value
+        // let countryId = lstCountries.value 
+        console.log("CountryId = " +  countryId)
+        fetch('/api/ApiGetAreaCountry/' + countryId)
+
+            .then(res => res.json())
+            .then(data => {
+                lstAreas.innerHTML = ''
+                let optionDefault = document.createElement('option')
+                optionDefault.innerHTML = "select Area"
+                optionDefault.disabled = true
+                optionDefault.selected = true
+                lstAreas.appendChild(optionDefault)
+                data.map( c => {
+                    console.log(c)
+                    let option = document.createElement('option')
+                    option.value = c.id
+                    option.innerHTML = c.name
+                    lstAreas.appendChild(option)
+                })
+            })
+    }
+
+    lstAreas.onchange = (ev) => { //?2
+        console.log(ev.clientX)
+        console.log(ev.clientY)
+        let areaId = ev.target.value
+        // let countryId = lstCountries.value 
+        console.log("AreaId = " +  areaId)
+        fetch('/api/ApiGetCityCountry/' + areaId)
+
+            .then(res => res.json())
+            .then(data => {
+            
+                lstCity.innerHTML = ''
+                data.map( c => {
+                    console.log(c)
+                    let option = document.createElement('option')
+                    option.value = c.id
+                    option.innerHTML = c.name
+                    lstCity.appendChild(option)
+                })
+            })
+    }
+
+
+    loadCountries();
+</script>
