@@ -1,0 +1,28 @@
+@model Homeworl_7_Toyota_Color.Models.Toyota.ColorModel
+
+@{
+    ViewBag.Title = "Title";
+    Layout = "_Layout";
+}
+
+<h2>Add Color</h2>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <input asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <input asp-for="RGB" type="color" />
+    </div>
+    <div class="form-group">
+        <input asp-for="Code" />
+    </div>
+    <div class="form-group">
+        <input type="file" name="file" accept="image/png, image/jpeg" />
+    </div>
+    <div class="form-group">
+        <input type="submit" />
+    </div>
+
+    
+</form>
