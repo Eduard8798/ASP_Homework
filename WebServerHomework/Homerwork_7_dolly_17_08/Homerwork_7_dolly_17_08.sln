@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homerwork_7_dolly_17_08", "Homerwork_7_dolly_17_08\Homerwork_7_dolly_17_08.csproj", "{A52FBFD1-9111-449B-B956-3FD9B270C55C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A52FBFD1-9111-449B-B956-3FD9B270C55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A52FBFD1-9111-449B-B956-3FD9B270C55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A52FBFD1-9111-449B-B956-3FD9B270C55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A52FBFD1-9111-449B-B956-3FD9B270C55C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
