@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Classwork_7_Toyota_Color_Links_19_08.Data;
 using Classwork_7_Toyota_Color_Links_19_08.Models;
+using Classwork_7_Toyota_Color_Links_19_08.Models.ViewModels;
 
 namespace Classwork_7_Toyota_Color_Links_19_08.Controllers.Toyota
 {
@@ -21,7 +22,7 @@ namespace Classwork_7_Toyota_Color_Links_19_08.Controllers.Toyota
         }
 
         // GET: Color
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 2,
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 20,
             string sortColumn = "Name", string sortDirection = "asc" )
         {
             
@@ -42,7 +43,7 @@ namespace Classwork_7_Toyota_Color_Links_19_08.Controllers.Toyota
                         var totalItems = await query.CountAsync();
                         
             // Получаем нужные записи, используя Skip и Take для пагинации
-            var colors = await _context.Color
+            var colors = await query
                 .Skip((pageNumber - 1) * pageSize) // Пропускаем предыдущие страницы
                 .Take(pageSize)                    // Берем количество записей для текущей страницы
                 .ToListAsync();
@@ -76,10 +77,10 @@ namespace Classwork_7_Toyota_Color_Links_19_08.Controllers.Toyota
                 TotalItems = totalItems,
                 //Sort
                 SortColumn = sortColumn,
-                SortDirection = sortDirection,
+                SortColumnSelectedList = sort,
                 
                 SortDirectionSelectedList = dir,
-                Columns = new List<string> {"Id","Name"}
+                Columns = new List<string> (["Id","Name"])
             };
 
             // Возвращаем список цветов и пагинацию

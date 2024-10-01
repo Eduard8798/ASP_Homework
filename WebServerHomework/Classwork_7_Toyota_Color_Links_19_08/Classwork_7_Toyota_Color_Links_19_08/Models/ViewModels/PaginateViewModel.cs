@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Classwork_7_Toyota_Color_Links_19_08.Models
+namespace Classwork_7_Toyota_Color_Links_19_08.Models.ViewModels
 {
     public class PaginateViewModel
     {

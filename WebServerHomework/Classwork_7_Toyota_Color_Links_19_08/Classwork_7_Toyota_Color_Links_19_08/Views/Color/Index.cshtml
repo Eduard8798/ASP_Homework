@@ -1,3 +1,5 @@
+@using Classwork_7_Toyota_Color_Links_19_08.Models.ViewModels
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model IEnumerable<Classwork_7_Toyota_Color_Links_19_08.Models.ColorModel>
 
 @{
@@ -25,7 +27,6 @@
             @Html.DisplayNameFor(model => model.Code)
         </th>
         <th>
-            @Html.Partial("_OrderBy",(PaginateViewModel) ViewData["Paginate"])
         </th>
     </tr>
     </thead>
@@ -36,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <img height="25" width="25" class="rounded-circle" src="@item.Url" ><br/>
+                <img height="50" width="50" class="rounded-circle" src="@item.Url"/><br />
                 @Html.DisplayFor(modelItem => item.Url)
             </td>
             <td style="background-color: @item.RGB">
@@ -54,5 +55,5 @@
     }
     </tbody>
 </table>
-@Html.Partial("_Pagination",(PaginateViewModel) ViewData["Paginate"])
-//
+@Html.Partial("_Pagination", (PaginateViewModel)ViewData["Paginate"])
+@Html.Partial("_OrderBy", (PaginateViewModel)ViewData["Paginate"])

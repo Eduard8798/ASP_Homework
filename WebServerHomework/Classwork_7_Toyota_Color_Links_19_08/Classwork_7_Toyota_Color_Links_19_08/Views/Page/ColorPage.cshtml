@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Color Page";
+}
+
+<h1 class="display-4">Colors</h1>
+<div>
+    <table>
+        <tbody id="tblColors">
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    
+    const tBody = document.getElementById('tblColors');
+     
+     let data = [];
+     let paginate = {};
+    function buildTable() {
+        data.map(c => {
+            let tr = document.createElement('tr');
+
+            // Столбец с именем цвета
+            let tdName = document.createElement('td');
+            tdName.innerText = c.name;
+            tr.appendChild(tdName);
+
+            // Столбец с изображением цвета
+            let tdColor = document.createElement('td');
+            tdColor.innerHTML = '<img height="50" width="50" class="rounded-circle" src="' + c.url + '" alt="' + c.name + '" />';
+            tr.appendChild(tdColor);
+
+            // Добавление строки в таблицу
+            tBody.appendChild(tr);
+        });
+    }
+
+let pageSize = 5;
+
+    fetch(`/api/ApiColor?pageSize=${pageSize}`)
+        .then(res => res.json())
+        .then(res => {
+            data = res.data;
+            paginate = res.paginate;
+            buildTable();
+        })
+        .catch(err => {
+            console.err(err)
+        })
+
+</script>

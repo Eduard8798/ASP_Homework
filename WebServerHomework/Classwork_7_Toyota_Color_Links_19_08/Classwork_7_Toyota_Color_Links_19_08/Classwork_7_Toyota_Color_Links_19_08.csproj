@@ -26,7 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\Toyota\" />
       <Folder Include="wwwroot\storage\color\" />
       <Folder Include="wwwroot\storage\configuration_color\" />
     </ItemGroup>
