@@ -1,0 +1,128 @@
+@{
+    ViewData["Title"] = "Index Color Toyota";
+}
+
+<h1 class="display-4">Colors</h1>
+<div>
+    <table>
+        <tbody id="tblColors">
+        </tbody>
+    </table>
+</div>
+<div>
+    <label for="pageNumber">Page Number:</label>
+    <input type="number" id="pageNumber" value="1" min="1">
+
+    <label for="pageSize">Page Size:</label>
+    <select id="pageSize">
+        <option value="2">2</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+
+    <label for="sortColumn">Sort By:</label>
+    <select id="sortColumn">
+        <option value="Name">Name</option>
+        <option value="Id">Id</option>
+    </select>
+
+    <label for="sortDirection">Sort Direction:</label>
+    <select id="sortDirection">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
+
+    <button id="fetchData">Fetch Data</button>
+</div>
+
+<div id="results">
+    <!-- Results will be displayed here -->
+</div>
+
+<script>
+
+    const tBody = document.getElementById('tblColors');
+
+    let data = [];
+    let paginate = {};
+    function buildTable() {
+        data.map(c => {
+            let tr = document.createElement('tr');
+
+            // Столбец с именем цвета
+            let tdName = document.createElement('td');
+            tdName.innerText = c.name;
+            tr.appendChild(tdName);
+
+            // Столбец с изображением цвета
+            let tdColor = document.createElement('td');
+            tdColor.innerHTML = '<img height="50" width="50" class="rounded-circle" src="' + c.url + '" alt="' + c.name + '" />';
+            tr.appendChild(tdColor);
+
+            // Добавление строки в таблицу
+            tBody.appendChild(tr);
+        });
+    }
+
+    document.getElementById('fetchData').addEventListener('click', () => {
+        // Получаем значения из элементов формы
+        const pageNumber = document.getElementById('pageNumber').value ;
+        
+        const pageSize = document.getElementById('pageSize').value ;
+        
+        const sortColumn = document.getElementById('sortColumn').value;
+        const sortDirection = document.getElementById('sortDirection').value;
+        
+
+    fetch(`/api/ApiColor?pageNumber=${pageNumber}&pageSize=${pageSize}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`)
+        .then(res => res.json())
+        .then(res => {
+            data = res.data;
+            paginate = res.paginate;
+            buildTable();
+        })
+        .catch(err => {
+            console.err(err)
+        })
+    });
+</script>
+
+
+@* <script> *@
+@*     document.getElementById('fetchData').addEventListener('click', () => { *@
+@*         // Получаем значения из элементов формы *@
+@*         const pageNumber = document.getElementById('pageNumber').value; *@
+@*         const pageSize = document.getElementById('pageSize').value; *@
+@*         const sortColumn = document.getElementById('sortColumn').value; *@
+@*         const sortDirection = document.getElementById('sortDirection').value; *@
+@* *@
+@*         // Формируем URL для запроса *@
+@*         const url = `/api/ApiColor?pageNumber=${pageNumber}&pageSize=${pageSize}&sortColumn=${sortColumn}&sortDirection=${sortDirection}`; *@
+@* *@
+@*         // Выполняем запрос *@
+@*         fetch(url) *@
+@*             .then(response => response.json()) *@
+@*             .then(data => { *@
+@*                 // Обработка данных и отображение на странице *@
+@*                 console.log(data); *@
+@*                 displayResults(data); *@
+@*             }) *@
+@*             .catch(error => { *@
+@*                 console.error('Error:', error); *@
+@*             }); *@
+@*     }); *@
+@* *@
+@*     // Функция для отображения результатов на странице *@
+@*     function displayResults(data) { *@
+@*         const resultsDiv = document.getElementById('results'); *@
+@*         resultsDiv.innerHTML = ''; // Очищаем предыдущие результаты *@
+@* *@
+@*         data.data.forEach(color => { *@
+@*             const colorDiv = document.createElement('div'); *@
+@*             colorDiv.textContent = `Id: ${color.id}, Name: ${color.name}`; *@
+@*             resultsDiv.appendChild(colorDiv); *@
+@*         }); *@
+@*     } *@
+@* *@
+@* </script> *@
